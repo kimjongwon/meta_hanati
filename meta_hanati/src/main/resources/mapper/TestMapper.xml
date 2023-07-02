@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hanati.cop.test">
+    <select id="findAllWithMap" resultType="hashmap" parameterType="hashmap">
+        SELECT * FROM products
+    </select>
+
+    <select id="findAllWithObj" resultType="Products" parameterType="hashmap">
+        SELECT * FROM products
+    </select>
+    
+    <select id="getLoginUser" resultType="hashmap" parameterType="hashmap">
+        SELECT * FROM login_user
+    </select>
+    
+    <insert id="insert" parameterType="hashmap">
+        insert into login_user values(#{user_id}, #{user_pw})
+    </insert>
+</mapper>

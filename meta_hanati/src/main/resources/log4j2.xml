@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <Property name="LOG_FORMAT">%d{yyyy-MM-dd HH:mm:ss} %p %m%n</Property>
+        <Property name="BASE_DIR">/logs</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_FORMAT}"/>
+        </Console>
+        <RollingFile name="File"
+                     fileName="${BASE_DIR}/systemLog.log"
+                     filePattern="${BASE_DIR}/systemLog.%d{yyyyMMdd}.log">
+            <PatternLayout pattern="${LOG_FORMAT}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${BASE_DIR}">
+                    <IfFileName glob="*.log" />
+                    <IfLastModified age="30d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- 스프링 프레임워크에서 찍는건 level을 info로 설정 -->
+        <Logger name="org.springframework" level="info" additivity="false" ><AppenderRef ref="Console" /><AppenderRef ref="File" /></Logger>
+        
+        <!-- jdbc.sql Loggers -->
+        <Logger name="jdbc.connection"      level="ERROR" additivity="false"><AppenderRef ref="Console" /><AppenderRef ref="File" /></Logger>
+        <Logger name="jdbc.audit"           level="ERROR" additivity="false"><AppenderRef ref="Console" /><AppenderRef ref="File" /></Logger>
+        <Logger name="jdbc.sqlonly"         level="ERROR" additivity="false"><AppenderRef ref="Console" /><AppenderRef ref="File" /></Logger>
+        <Logger name="jdbc.sqltiming"       level="info" additivity="false"><AppenderRef ref="Console" /><AppenderRef ref="File" /></Logger>
+        <Logger name="jdbc.resultset"       level="ERROR" additivity="false"><AppenderRef ref="Console" /><AppenderRef ref="File" /></Logger>
+        <Logger name="jdbc.resultsettable"  level="info" additivity="false"><AppenderRef ref="Console" /><AppenderRef ref="File" /></Logger>
+        
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File" />
+        </Root>
+    </Loggers>
+</Configuration>
