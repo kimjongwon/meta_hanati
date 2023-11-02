@@ -13,6 +13,6 @@ public class HanatiCopLoginController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String copMain(HttpServletRequest request, HttpServletResponse response, ModelAndView view) throws Exception {
-		return "login/login";
+		return "login/login.jsp";
 	}
 }
